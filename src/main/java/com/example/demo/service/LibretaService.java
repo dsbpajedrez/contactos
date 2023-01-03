@@ -2,8 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Contacto;
 import com.example.demo.domain.Telefono;
-import com.example.demo.repository.ContactoRepository;
-import com.example.demo.repository.TelefonoRepository;
+import com.example.demo.Repository.ContactoRepository;
+import com.example.demo.Repository.TelefonoRepository;
 import com.example.demo.service.interfaces.ILibreta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -33,15 +33,20 @@ public class LibretaService implements ILibreta {
     @Override
     @Transactional(readOnly = true)
     public List<Contacto> getList() {
-        return contactoRepository.findAll();
+        return (List<Contacto>) contactoRepository.findAll();
     }
-
 
     @Override
-    @Transactional(readOnly = true)
     public List<Contacto> getList(String field, Sort.Direction order) {
-        return contactoRepository.findAll(Sort.by(order, field));
+        return null;
     }
+
+
+    //@Override
+    //@Transactional(readOnly = true)
+    //public List<Contacto> getList(String field, Sort.Direction order) {
+    //    return contactoRepository.findAll(Sort.by(order, field));
+    //}
 
 
     @Override
