@@ -3,6 +3,7 @@ package com.example.demo.Repository;
 
 import com.example.demo.domain.Contacto;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,6 +16,7 @@ public interface ContactoRepository extends JpaRepository<Contacto, Integer> {
                 "ORDER BY cnt.nombre ASC")
         public List<Contacto> findByNombreOrApellidoStartingWith(@Param("data") String data);
 
+
         @Modifying
         @Query(value = "update Contacto cnt set cnt.nombre = :nombre, cnt.updatedAt = CURRENT_TIMESTAMP where cnt.id = :id")
         public void updateAtNombre(@Param(value = "id") Integer id, @Param(value = "nombre") String nombre);
@@ -22,5 +24,6 @@ public interface ContactoRepository extends JpaRepository<Contacto, Integer> {
         @Modifying
         @Query(value = "update Contacto cnt set cnt.apellido = :apellido, cnt.updatedAt = CURRENT_TIMESTAMP where cnt.id = :id")
         public void updateAtApellido(@Param(value = "id") Integer id, @Param(value = "apellido") String apellido);
+        
     //public List<Contacto> findByNombreOrApellidoContains()
 }
