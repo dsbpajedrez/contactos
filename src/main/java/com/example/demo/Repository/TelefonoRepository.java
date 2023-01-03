@@ -1,7 +1,8 @@
 package com.example.demo.Repository;
 
-import com.example.demo.domain.Contacto;
-import org.springframework.data.repository.CrudRepository;
 
-public interface TelefonoRepository  extends CrudRepository<Telefono, Integer> {
+import com.example.demo.domain.Telefono;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TelefonoRepository  extends JpaRepository<Telefono, Integer> {
 }
