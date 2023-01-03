@@ -36,17 +36,12 @@ public class LibretaService implements ILibreta {
         return (List<Contacto>) contactoRepository.findAll();
     }
 
+
     @Override
+    @Transactional(readOnly = true)
     public List<Contacto> getList(String field, Sort.Direction order) {
-        return null;
+        return contactoRepository.findAll(Sort.by(order, field));
     }
-
-
-    //@Override
-    //@Transactional(readOnly = true)
-    //public List<Contacto> getList(String field, Sort.Direction order) {
-    //    return contactoRepository.findAll(Sort.by(order, field));
-    //}
 
 
     @Override
