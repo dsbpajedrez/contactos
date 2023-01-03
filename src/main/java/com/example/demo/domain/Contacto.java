@@ -8,7 +8,7 @@ import java.time.Instant;
 
 @Entity
 @Data
-@Table(name = "conctacto")
+@Table(name = "contacto")
 public class Contacto implements Serializable {
 
     private static final long serialVersionUID = 1l;
@@ -24,7 +24,7 @@ public class Contacto implements Serializable {
 
     // Apellido
     @Column(name = "cnt_apellido", nullable = false)
-    private Integer apellido;
+    private String apellido;
 
     // Fecha de creacion
     @Column(name = "cnt_created_at")

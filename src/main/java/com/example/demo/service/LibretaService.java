@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -32,14 +31,15 @@ public class LibretaService implements ILibreta {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Contacto> getList() {
+    public List<Contacto> getAll() {
         return (List<Contacto>) contactoRepository.findAll();
     }
 
 
     @Override
     @Transactional(readOnly = true)
-    public List<Contacto> getList(String field, Sort.Direction order) {
+
+    public List<Contacto> getListOrdered(String field, Sort.Direction order) {
         return contactoRepository.findAll(Sort.by(order, field));
     }
 
@@ -70,9 +70,10 @@ public class LibretaService implements ILibreta {
     @Override
     @Transactional
     public Telefono createTelefono(Telefono telefono) {
-        //telefono.setCreatedAt(Instant.now());
-        //return telefonoRepository.save(telefono);
-        return null;
+
+        telefono.setFechaCreacion(Instant.now());
+        return telefonoRepository.save(telefono);
+
     }
 
 
@@ -88,44 +89,44 @@ public class LibretaService implements ILibreta {
     @Override
     @Transactional
     public Contacto updateNombre(Integer id, Contacto contacto) {
-//        contacto.setId(id);
-//        contacto.setUpdatedAt(Instant.now());
-//        contactoRepository.updateNombre(id, contacto.getNombre());
-//        return contacto;
-        return null;
+
+        contacto.setId(id);
+        contacto.setUpdatedAt(Instant.now());
+        contactoRepository.updateAtNombre(id, contacto.getNombre());
+        return contacto;
+
     }
 
 
     @Override
     @Transactional
     public Contacto updateApellidos(Integer id, Contacto contacto) {
-//        contacto.setId(id);
-//        contacto.setUpdatedAt(Instant.now());
-//        contactoRepository.updateApellido(id, contacto.getApellido());
-//        return contacto;
-        return null;
+
+        contacto.setId(id);
+        contacto.setUpdatedAt(Instant.now());
+        contactoRepository.updateAtApellido(id, contacto.getApellido());
+        return contacto;
+      
     }
 
 
     @Override
     @Transactional
     public Telefono updateTelefono(Integer id, Telefono telefono) {
-//        telefono.setId(id);
-//        telefono.setUpdatedAt(Instant.now());
-//        telefonoRepository.save(telefono);
-//        return telefono;
-        return null;
+        telefono.setId(id);
+        telefono.setFechaActualizacion(Instant.now());
+        telefonoRepository.save(telefono);
+        return telefono;
     }
 
 
     @Override
     @Transactional
     public Telefono updateOnlyTelefono(Integer id, Telefono telefono) {
-//        telefono.setId(id);
-//        telefono.setUpdatedAt(Instant.now());
-//        telefonoRepository.updateTelefono(id, telefono.getTelefono());
-//        return telefono;
-        return null;
+        telefono.setId(id);
+        telefono.setFechaActualizacion(Instant.now());
+        telefonoRepository.updateTelefono(id, telefono.getTelefono());
+        return telefono;
     }
 
 
