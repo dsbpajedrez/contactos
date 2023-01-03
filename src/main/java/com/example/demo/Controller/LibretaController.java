@@ -33,36 +33,36 @@ public class LibretaController {
     @GetMapping(path = "/api/v1/")
     public ResponseEntity<Response> homeIndex3(HttpServletResponse httpResponse) {
         return null;
-
     }
     @GetMapping(path = "/api/v1/index")
     public ResponseEntity<Response> index() {
-        return null;
-
+        return (ResponseEntity<Response>) libretaService.getAll();
     }
     @GetMapping(path = "/api/v1/index/orderby/{orderBy}/{order}")
     public ResponseEntity<Response> indexOrderBy(
             @PathVariable(value="orderBy") String orderBy,
             @PathVariable(value="order") Sort.Direction order
     ) {
-        return null;
+        return (ResponseEntity<Response>) libretaService.getListOrdered(orderBy, order);
 
     }
-    @GetMapping(path = "/api/v1/search/contact/{dataToSearch}")
-    public ResponseEntity<Response> searchContactByNombreOrApellido(
-            @PathVariable(value="dataToSearch") String dataToSearch
-    ) {
-        return null;
-
-    }
+    //@GetMapping(path = "/api/v1/search/contact/{dataToSearch}")
+    //public ResponseEntity<Response> searchContactByNombreOrApellido(
+//            @PathVariable(value="dataToSearch") String dataToSearch
+    //) {
+//        return null;
+//
+    //}
     @PostMapping(path = "/api/v1/contact")
     public ResponseEntity<Response> createContacto(@RequestBody Contacto contacto) {
-        return null;
+      libretaService.createContacto(contacto)  ;
+      return new  ResponseEntity<>(HttpStatus.CREATED);
+        //return (ResponseEntity<Response>) libretaService.createContacto(contacto);
     }
     @PostMapping(path = "/api/v1/phone")
     public ResponseEntity<Response> createTelefono(@RequestBody Telefono telefono) {
-        return null;
-
+        libretaService.createTelefono(telefono);
+        return new  ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/api/v1/contact/{id}")
@@ -70,50 +70,50 @@ public class LibretaController {
             @RequestBody Contacto contacto,
             @PathVariable(value="id") Integer id
     ) {
-        return null;
-
+        libretaService.updateContacto(id, contacto);
+        return new  ResponseEntity<>(HttpStatus.OK);
     }
     @PutMapping(path = "/api/v1/phone/{id}")
     public ResponseEntity<Response> updateTelefono(
             @RequestBody Telefono telefono,
             @PathVariable(value="id") Integer id
     ) {
-        return null;
-
+        libretaService.updateTelefono(id, telefono);
+        return new  ResponseEntity<>(HttpStatus.OK);
     }
     @PatchMapping(path = "/api/v1/contact/{id}/name")
     public ResponseEntity<Response> updateNombreFromContacto(
             @RequestBody Contacto contacto,
             @PathVariable(value="id") Integer id
     ) {
-        return null;
-
+        libretaService.updateNombre(id, contacto);
+        return new  ResponseEntity<>(HttpStatus.OK);
     }
     @PatchMapping(path = "/api/v1/contact/{id}/lastname")
     public ResponseEntity<Response> updateApellidoFromContacto(
             @RequestBody Contacto contacto,
             @PathVariable(value="id") Integer id
     ) {
-        return null;
-
+         libretaService.updateApellidos(id, contacto);
+         return new  ResponseEntity<>(HttpStatus.OK);
     }
     @PatchMapping(path = "/api/v1/phone/{id}/number")
     public ResponseEntity<Response> updateOnlyTelefono(
             @RequestBody Telefono telefono,
             @PathVariable(value="id") Integer id
     ) {
-        return null;
-
+        libretaService.updateOnlyTelefono(id, telefono);
+        return new  ResponseEntity<>(HttpStatus.OK); 
     }
     @DeleteMapping(path = "/api/v1/contact/{id}")
     public ResponseEntity<Response> deleteContacto(@PathVariable(value="id") Integer id) {
-        return null;
-
+        libretaService.deleteContacto(id);
+         return new  ResponseEntity<>(HttpStatus.OK); 
     }
     @DeleteMapping(path = "/api/v1/phone/{id}")
     public ResponseEntity<Response> deleteTelefono(@PathVariable(value="id") Integer id) {
-        return null;
-
+        libretaService.deleteTelefono(id);
+        return new  ResponseEntity<>(HttpStatus.OK);
     }
     private ResponseEntity<Response> getResponseHome(HttpServletResponse httpResponse) {
         return null;

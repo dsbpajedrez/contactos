@@ -7,8 +7,8 @@ import org.springframework.data.domain.Sort;
 import java.util.List;
 
 public interface ILibreta {
-    public List<Contacto> getList();
-    public List<Contacto> getList(String field, Sort.Direction order);
+    public List<Contacto> getAll();
+    public List<Contacto> getListOrdered(String field, Sort.Direction order);
     public List<Contacto> searchContacto(String dataToSearch);
     public Contacto createContacto(Contacto contacto);
     public Telefono createTelefono(Telefono telefono);

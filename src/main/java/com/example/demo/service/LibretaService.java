@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -32,34 +31,30 @@ public class LibretaService implements ILibreta {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Contacto> getList() {
+    public List<Contacto> getAll() {
         return (List<Contacto>) contactoRepository.findAll();
     }
 
+
     @Override
-    public List<Contacto> getList(String field, Sort.Direction order) {
-        return null;
+    @Transactional(readOnly = true)
+    public List<Contacto> getListOrdered(String field, Sort.Direction order) {
+        return contactoRepository.findAll(Sort.by(order, field));
     }
-
-
-    //@Override
-    //@Transactional(readOnly = true)
-    //public List<Contacto> getList(String field, Sort.Direction order) {
-    //    return contactoRepository.findAll(Sort.by(order, field));
-    //}
 
 
     @Override
     @Transactional(readOnly = true)
     public List<Contacto> searchContacto(String dataToSearch) {
-        var contacto1 = contactoRepository.findByNombreOrApellidoStartingWith(dataToSearch);
-        var contacto2 = contactoRepository.findByNombreOrApellidoContains(dataToSearch);
-        var contacto3 = contactoRepository.findByNombreOrApellidoEndingWith(dataToSearch);
-        var answer = new HashSet<Contacto>();
-        answer.addAll(contacto1);
-        answer.addAll(contacto2);
-        answer.addAll(contacto3);
-        return answer.stream().toList();
+        //var contacto1 = contactoRepository.findByNombreOrApellidoStartingWith(dataToSearch);
+        //var contacto2 = contactoRepository.findByNombreOrApellidoContains(dataToSearch);
+        //var contacto3 = contactoRepository.findByNombreOrApellidoEndingWith(dataToSearch);
+        //var answer = new HashSet<Contacto>();
+        //answer.addAll(contacto1);
+        //answer.addAll(contacto2);
+        //answer.addAll(contacto3);
+        //return answer.stream().toList();
+        return null;
     }
 
 
@@ -74,7 +69,7 @@ public class LibretaService implements ILibreta {
     @Override
     @Transactional
     public Telefono createTelefono(Telefono telefono) {
-        telefono.setCreatedAt(Instant.now());
+        telefono.setFechaCreacion(Instant.now());
         return telefonoRepository.save(telefono);
     }
 
@@ -93,7 +88,7 @@ public class LibretaService implements ILibreta {
     public Contacto updateNombre(Integer id, Contacto contacto) {
         contacto.setId(id);
         contacto.setUpdatedAt(Instant.now());
-        contactoRepository.updateNombre(id, contacto.getNombre());
+        contactoRepository.updateAtNombre(id, contacto.getNombre());
         return contacto;
     }
 
@@ -103,8 +98,9 @@ public class LibretaService implements ILibreta {
     public Contacto updateApellidos(Integer id, Contacto contacto) {
         contacto.setId(id);
         contacto.setUpdatedAt(Instant.now());
-        contactoRepository.updateApellido(id, contacto.getApellido());
+        contactoRepository.updateAtApellido(id, contacto.getApellido());
         return contacto;
+      
     }
 
 
@@ -112,7 +108,7 @@ public class LibretaService implements ILibreta {
     @Transactional
     public Telefono updateTelefono(Integer id, Telefono telefono) {
         telefono.setId(id);
-        telefono.setUpdatedAt(Instant.now());
+        telefono.setFechaActualizacion(Instant.now());
         telefonoRepository.save(telefono);
         return telefono;
     }
@@ -122,7 +118,7 @@ public class LibretaService implements ILibreta {
     @Transactional
     public Telefono updateOnlyTelefono(Integer id, Telefono telefono) {
         telefono.setId(id);
-        telefono.setUpdatedAt(Instant.now());
+        telefono.setFechaActualizacion(Instant.now());
         telefonoRepository.updateTelefono(id, telefono.getTelefono());
         return telefono;
     }
