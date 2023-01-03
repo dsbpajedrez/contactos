@@ -1,12 +1,18 @@
-package com.sofka.taller9.domain;
+package com.domain;
 
+import jakarta.persistence.*;
+import lombok.Data;
 
-import javax.persistence.*;
-import java.sql.Date;
+import java.io.Serializable;
+import java.time.Instant;
 
 @Entity
+@Data
 @Table(name = "conctacto")
-public class Contacto {
+public class Contacto implements Serializable {
+
+    private static final long serialVersionUID = 1l;
+
     // Id de la entidad
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +28,13 @@ public class Contacto {
 
     // Fecha de creacion
     @Column(name = "cnt_created_at")
-    private Date fechaCreacion;
+    private Instant createdAt;
 
     // Fecha de actualizacion
     @Column(name = "cnt_updated_at")
-    private Date fechaActualizacion;
+    private Instant updatedAt;
+
+    // Fecha de eliminacion
+    @Column(name = "cnt_deleted_at")
+    private Instant deleteAt;
 }
