@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface TelefonoRepository  extends JpaRepository<Telefono, Integer> {
     @Modifying
-    @Query(value = "update Telefono tel set tel.telefono = :telefono, tel.updatedAt = CURRENT_TIMESTAMP where tel.id = :id")
+    @Query(value = "update Telefono tel set tel.telefono = :telefono, tel.updatedAt = CURRENT_TIMESTAMP where tel.id = :id",nativeQuery = true)
     public void updateTelefono(@Param(value= "id") Integer id, @Param(value = "telefono") String telefono);
 
 }
