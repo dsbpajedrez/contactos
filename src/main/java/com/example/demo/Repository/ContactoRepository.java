@@ -16,11 +16,11 @@ public interface ContactoRepository extends JpaRepository<Contacto, Integer> {
         public List<Contacto> findByNombreOrApellidoStartingWith(@Param("data") String data);
 
         @Modifying
-        @Query(value = "update Contacto cnt set cnt.nombre = :nombre, cnt.updatedAt = CURRENT_TIMESTAMP where cnt.id = :id")
+        @Query(value = "update Contacto cnt set cnt.nombre = :nombre, cnt.updatedAt = CURRENT_TIMESTAMP where cnt.id = :id",nativeQuery = true)
         public void updateAtNombre(@Param(value = "id") Integer id, @Param(value = "nombre") String nombre);
 
         @Modifying
-        @Query(value = "update Contacto cnt set cnt.apellido = :apellido, cnt.updatedAt = CURRENT_TIMESTAMP where cnt.id = :id")
+        @Query(value = "update Contacto cnt set cnt.apellido = :apellido, cnt.updatedAt = CURRENT_TIMESTAMP where cnt.id = :id",nativeQuery = true)
         public void updateAtApellido(@Param(value = "id") Integer id, @Param(value = "apellido") String apellido);
     //public List<Contacto> findByNombreOrApellidoContains()
 }
