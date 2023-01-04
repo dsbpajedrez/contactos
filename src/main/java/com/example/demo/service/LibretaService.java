@@ -38,6 +38,7 @@ public class LibretaService implements ILibreta {
 
     @Override
     @Transactional(readOnly = true)
+
     public List<Contacto> getListOrdered(String field, Sort.Direction order) {
         return contactoRepository.findAll(Sort.by(order, field));
     }
@@ -69,8 +70,10 @@ public class LibretaService implements ILibreta {
     @Override
     @Transactional
     public Telefono createTelefono(Telefono telefono) {
+
         telefono.setFechaCreacion(Instant.now());
         return telefonoRepository.save(telefono);
+
     }
 
 
@@ -86,16 +89,19 @@ public class LibretaService implements ILibreta {
     @Override
     @Transactional
     public Contacto updateNombre(Integer id, Contacto contacto) {
+
         contacto.setId(id);
         contacto.setUpdatedAt(Instant.now());
         contactoRepository.updateAtNombre(id, contacto.getNombre());
         return contacto;
+
     }
 
 
     @Override
     @Transactional
     public Contacto updateApellidos(Integer id, Contacto contacto) {
+
         contacto.setId(id);
         contacto.setUpdatedAt(Instant.now());
         contactoRepository.updateAtApellido(id, contacto.getApellido());
